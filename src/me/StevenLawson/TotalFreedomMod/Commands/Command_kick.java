@@ -1,15 +1,9 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.StevenLawson.TotalFreedomMod.Bridge.TFM_WorldEditBridge;
-import me.StevenLawson.TotalFreedomMod.TFM_Ban;
-import me.StevenLawson.TotalFreedomMod.TFM_BanManager;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import me.StevenLawson.TotalFreedomMod.TFM_UuidManager;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,7 +28,7 @@ public class Command_kick extends TFM_Command
         {
             reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
         }
-        TFM_Util.adminAction(sender.getName(), "Kicking player: " + player.getName() + ".", true);
+        TFM_Util.adminAction(sender.getName(), "Kicking player: " + player.getName() + ".");
         if (reason != null)
         {
             TFM_Util.bcastMsg(ChatColor.RED + "Reason: " + reason);

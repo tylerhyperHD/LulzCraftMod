@@ -47,7 +47,7 @@ public class Command_ops extends TFM_Command
                 return true;
             }
 
-            TFM_Util.adminAction(sender.getName(), "Purging all operators", true);
+            TFM_Util.adminAction(sender.getName(), "Purging all operators");
 
             for (OfflinePlayer player : server.getOperators())
             {

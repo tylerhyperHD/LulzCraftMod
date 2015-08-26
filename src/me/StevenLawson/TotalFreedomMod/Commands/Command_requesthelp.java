@@ -17,7 +17,7 @@ public class Command_requesthelp extends TFM_Command
             return false;
         }
 
-        TFM_Util.adminAction(sender.getName(), "Requesting help", true);
+        TFM_Util.adminAction(sender.getName(), "Requesting help");
 
         return true;
     }

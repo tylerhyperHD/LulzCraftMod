@@ -143,12 +143,31 @@ public class TFM_Util
     {
         TFM_Util.playerMsg(sender, message, ChatColor.GRAY);
     }
-
-    public static void adminAction(String adminName, String action, boolean isRed)
+    
+    public static void setFlying(Player player, boolean flying)
     {
-        TFM_Util.bcastMsg(adminName + " - " + action, (isRed ? ChatColor.RED : ChatColor.AQUA));
+        player.setAllowFlight(true);
+        player.setFlying(flying);
     }
 
+    public static void adminAction(String adminName, String action)
+    {
+        TFM_Util.bcastMsg(ChatColor.GREEN + adminName + ChatColor.DARK_GRAY + " > " + ChatColor.GRAY + action);
+    }
+
+    public static boolean isUniqueId(String uuid)
+    {
+        try
+        {
+            UUID.fromString(uuid);
+            return true;
+        }
+        catch (IllegalArgumentException ex)
+        {
+            return false;
+        }
+    }
+    
     public static String getIp(OfflinePlayer player)
     {
         if (player.isOnline())

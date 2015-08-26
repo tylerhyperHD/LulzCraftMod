@@ -22,7 +22,7 @@ public class Command_invis extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("smite"))
             {
-                TFM_Util.adminAction(sender.getName(), "Smiting all invisible players", true);
+                TFM_Util.adminAction(sender.getName(), "Smiting all invisible players");
                 smite = true;
             }
             else

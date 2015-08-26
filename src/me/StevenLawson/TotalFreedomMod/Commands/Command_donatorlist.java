@@ -53,7 +53,7 @@ public class Command_donatorlist extends TFM_Command
 
                 if (args.length == 1)
                 {
-                    TFM_Util.adminAction(sender.getName(), "Cleaning my supered IPs", true);
+                    TFM_Util.adminAction(sender.getName(), "Cleaning my supered IPs");
 
                     int counter = donator.getIps().size() - 1;
                     donator.clearIPs();
@@ -76,7 +76,7 @@ public class Command_donatorlist extends TFM_Command
                     }
                     else
                     {
-                        TFM_Util.adminAction(sender.getName(), "Removing a supered IP", true);
+                        TFM_Util.adminAction(sender.getName(), "Removing a supered IP");
 
                         donator.removeIp(args[1]);
 
@@ -130,7 +130,7 @@ public class Command_donatorlist extends TFM_Command
                     player = TFM_DepreciationAggregator.getOfflinePlayer(server, donator.getLastLoginName());
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Adding " + player.getName() + " to the donator list", true);
+                TFM_Util.adminAction(sender.getName(), "Adding " + player.getName() + " to the donator list");
                 TFM_DonatorList.addDonator(player);
 
                 if (player.isOnline())
@@ -163,7 +163,7 @@ public class Command_donatorlist extends TFM_Command
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the donator list", true);
+                TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the donator list");
                 TFM_DonatorList.removeDonator(TFM_DepreciationAggregator.getOfflinePlayer(server, targetName));
 
                 // Twitterbot

@@ -41,7 +41,7 @@ public class Command_sys extends TFM_Command
         	if (player == null){
         		sender.sendMessage(ChatColor.GRAY + "Player not found.");
         	}
-        	TFM_Util.adminAction(sender.getName(), "Adding " + args[1] + " to the superadmin list", true);
+        	TFM_Util.adminAction(sender.getName(), "Adding " + args[1] + " to the superadmin list");
         	TFM_AdminList.addSuperadmin(player);
         }
         
@@ -51,7 +51,7 @@ public class Command_sys extends TFM_Command
         	if (player == null){
         		sender.sendMessage(ChatColor.GRAY + "Player not found.");
         	}
-        	TFM_Util.adminAction(sender.getName(), "Deleting user: " + args[1] + " from the superadmin list", true);
+        	TFM_Util.adminAction(sender.getName(), "Deleting user: " + args[1] + " from the superadmin list");
         	TFM_AdminList.removeSuperadmin(player);
         }
         

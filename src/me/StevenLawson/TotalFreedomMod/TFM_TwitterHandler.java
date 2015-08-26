@@ -39,7 +39,7 @@ public class TFM_TwitterHandler
         final String reply = delTwitter(targetName);
         if ("ok".equals(reply))
         {
-            TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from TwitterBot", true);
+            TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from TwitterBot");
         }
         else if ("disabled".equals(reply))
         {

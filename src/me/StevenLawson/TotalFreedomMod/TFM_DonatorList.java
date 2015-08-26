@@ -157,7 +157,7 @@ public class TFM_DonatorList
 
         save(newDonator);
     }
-
+    
     public static void load()
     {
         donatorList.clear();
@@ -580,7 +580,7 @@ public class TFM_DonatorList
             {
                 if (verbose)
                 {
-                    TFM_Util.adminAction("TotalFreedomMod", "Deactivating donator " + superadmin.getLastLoginName() + ", inactive for " + lastLoginHours + " hours.", true);
+                    TFM_Util.adminAction("LulzCraftMod", "Deactivating donator " + superadmin.getLastLoginName() + ", inactive for " + lastLoginHours + " hours.");
                 }
 
                 superadmin.setActivated(false);

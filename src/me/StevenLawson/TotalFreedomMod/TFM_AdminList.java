@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import me.StevenLawson.TotalFreedomMod.Commands.Command_logs;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_Config;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_MainConfig;
@@ -42,7 +43,8 @@ public class TFM_AdminList
         seniorConsoleNames = new HashSet<String>();
         superIps = new HashSet<String>();
 
-        SUPERADMIN_SERVICE = new Function<Player, Boolean>() {
+        SUPERADMIN_SERVICE = new Function<Player, Boolean>()
+        {
 
             @Override
             public Boolean apply(Player f)
@@ -82,6 +84,11 @@ public class TFM_AdminList
         return Collections.unmodifiableSet(superIps);
     }
 
+    public static Set<TFM_Admin> getAllAdmins()
+    {
+        return Sets.newHashSet(adminList.values());
+    }
+
     public static Set<String> getSuperNames()
     {
         final Set<String> names = new HashSet<String>();
@@ -99,7 +106,7 @@ public class TFM_AdminList
         return Collections.unmodifiableSet(names);
     }
 
-    public static Set<String> getLowerSuperNames()
+    public static Set<String> getLowercaseSuperNames()
     {
         final Set<String> names = new HashSet<String>();
 
@@ -116,11 +123,6 @@ public class TFM_AdminList
         return Collections.unmodifiableSet(names);
     }
 
-    public static Set<TFM_Admin> getAllAdmins()
-    {
-        return Sets.newHashSet(adminList.values());
-    }
-
     public static void setUuid(TFM_Admin admin, UUID oldUuid, UUID newUuid)
     {
         if (!adminList.containsKey(oldUuid))
@@ -135,6 +137,7 @@ public class TFM_AdminList
             return;
         }
 
+        // Add new entry
         final TFM_Admin newAdmin = new TFM_Admin(
                 newUuid,
                 admin.getLastLoginName(),
@@ -143,19 +146,16 @@ public class TFM_AdminList
                 admin.isTelnetAdmin(),
                 admin.isSeniorAdmin(),
                 admin.isActivated());
-
         newAdmin.addIps(admin.getIps());
-
-        adminList.remove(oldUuid);
         adminList.put(newUuid, newAdmin);
+        save(newAdmin);
 
+        // Remove old entry
+        adminList.remove(oldUuid);
         final TFM_Config config = new TFM_Config(TotalFreedomMod.plugin, TotalFreedomMod.SUPERADMIN_FILENAME, true);
-
         config.load();
         config.set("admins." + oldUuid.toString(), null);
         config.save();
-
-        save(newAdmin);
     }
 
     public static void load()
@@ -183,7 +183,7 @@ public class TFM_AdminList
 
         for (String uuidString : section.getKeys(false))
         {
-            if (!TFM_UuidManager.isUniqueId(uuidString))
+            if (!TFM_Util.isUniqueId(uuidString))
             {
                 TFM_Log.warning("Invalid Unique ID: " + uuidString + " in superadmin.yml, ignoring");
                 continue;
@@ -404,34 +404,20 @@ public class TFM_AdminList
         saveAll();
     }
 
-    public static boolean isSeniorAdmin(CommandSender sender)
+    public static boolean isSuperAdminSafe(UUID uuid, String ip)
     {
-        return isSeniorAdmin(sender, false);
+        if (TotalFreedomMod.server.getOnlineMode() && uuid != null)
+        {
+            return TFM_AdminList.getSuperUUIDs().contains(uuid);
+        }
+
+        final TFM_Admin admin = TFM_AdminList.getEntryByIp(ip);
+        return admin != null && admin.isActivated();
     }
 
-    public static boolean isSeniorAdmin(CommandSender sender, boolean verifySuperadmin)
+    public static synchronized boolean isSuperAdminSync(CommandSender sender)
     {
-        if (verifySuperadmin)
-        {
-            if (!isSuperAdmin(sender))
-            {
-                return false;
-            }
-        }
-
-        if (!(sender instanceof Player))
-        {
-            return seniorConsoleNames.contains(sender.getName())
-                    || (TFM_MainConfig.getBoolean(TFM_ConfigEntry.CONSOLE_IS_SENIOR) && sender.getName().equals("CONSOLE"));
-        }
-
-        final TFM_Admin entry = getEntry((Player) sender);
-        if (entry != null)
-        {
-            return entry.isSeniorAdmin();
-        }
-
-        return false;
+        return isSuperAdmin(sender);
     }
 
     public static boolean isSuperAdmin(CommandSender sender)
@@ -475,6 +461,36 @@ public class TFM_AdminList
         if (entry != null)
         {
             return entry.isTelnetAdmin();
+        }
+
+        return false;
+    }
+
+    public static boolean isSeniorAdmin(CommandSender sender)
+    {
+        return isSeniorAdmin(sender, false);
+    }
+
+    public static boolean isSeniorAdmin(CommandSender sender, boolean verifySuperadmin)
+    {
+        if (verifySuperadmin)
+        {
+            if (!isSuperAdmin(sender))
+            {
+                return false;
+            }
+        }
+
+        if (!(sender instanceof Player))
+        {
+            return seniorConsoleNames.contains(sender.getName())
+                    || (TFM_MainConfig.getBoolean(TFM_ConfigEntry.CONSOLE_IS_SENIOR) && sender.getName().equals("CONSOLE"));
+        }
+
+        final TFM_Admin entry = getEntry((Player) sender);
+        if (entry != null)
+        {
+            return entry.isSeniorAdmin();
         }
 
         return false;
@@ -631,6 +647,7 @@ public class TFM_AdminList
 
         final TFM_Admin superadmin = adminList.get(uuid);
         superadmin.setActivated(false);
+        Command_logs.deactivateSuperadmin(superadmin);
 
         saveAll();
         updateIndexLists();
@@ -656,10 +673,11 @@ public class TFM_AdminList
             {
                 if (verbose)
                 {
-                    TFM_Util.adminAction("TotalFreedomMod", "Deactivating superadmin " + superadmin.getLastLoginName() + ", inactive for " + lastLoginHours + " hours.", true);
+                    TFM_Util.adminAction("TotalFreedomMod", "Deactivating superadmin " + superadmin.getLastLoginName() + ", inactive for " + lastLoginHours + " hours.");
                 }
 
                 superadmin.setActivated(false);
+                Command_logs.deactivateSuperadmin(superadmin);
                 TFM_TwitterHandler.delTwitter(superadmin.getLastLoginName());
             }
         }

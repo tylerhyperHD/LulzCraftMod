@@ -48,7 +48,7 @@ public class Command_tag extends TFM_Command
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Removing all tags", false);
+                TFM_Util.adminAction(sender.getName(), "Removing all tags");
 
                 int count = 0;
                 for (final Player player : server.getOnlinePlayers())

@@ -24,7 +24,7 @@ public class Command_fr extends TFM_Command
 
             if (allFrozen)
             {
-                TFM_Util.adminAction(sender.getName(), "Freezing all players", false);
+                TFM_Util.adminAction(sender.getName(), "Freezing all players");
 
                 setAllFrozen(true);
                 playerMsg("Players are now frozen.");
@@ -39,7 +39,7 @@ public class Command_fr extends TFM_Command
             }
             else
             {
-                TFM_Util.adminAction(sender.getName(), "Unfreezing all players", false);
+                TFM_Util.adminAction(sender.getName(), "Unfreezing all players");
                 setAllFrozen(false);
                 playerMsg("Players are now free to move.");
             }
@@ -49,7 +49,7 @@ public class Command_fr extends TFM_Command
             if (args[0].toLowerCase().equals("purge"))
             {
                 setAllFrozen(false);
-                TFM_Util.adminAction(sender.getName(), "Unfreezing all players", false);
+                TFM_Util.adminAction(sender.getName(), "Unfreezing all players");
             }
             else
             {
@@ -75,7 +75,7 @@ public class Command_fr extends TFM_Command
     public static void setAllFrozen(boolean freeze)
     {
         allFrozen = freeze;
-        for (TFM_PlayerData data : TFM_PlayerData.USER_INFO.values())
+        for (TFM_PlayerData data : TFM_PlayerData.PLAYER_DATA.values())
         {
             data.setFrozen(freeze);
         }

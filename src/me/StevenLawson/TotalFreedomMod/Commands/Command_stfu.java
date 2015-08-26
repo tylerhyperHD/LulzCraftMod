@@ -40,7 +40,7 @@ public class Command_stfu extends TFM_Command
         }
         else if (args[0].equalsIgnoreCase("purge"))
         {
-            TFM_Util.adminAction(sender.getName(), "Unmuting all players.", true);
+            TFM_Util.adminAction(sender.getName(), "Unmuting all players.");
             TFM_PlayerData info;
             int count = 0;
             for (Player mp : server.getOnlinePlayers())
@@ -56,7 +56,7 @@ public class Command_stfu extends TFM_Command
         }
         else if (args[0].equalsIgnoreCase("all"))
         {
-            TFM_Util.adminAction(sender.getName(), "Muting all non-Superadmins", true);
+            TFM_Util.adminAction(sender.getName(), "Muting all non-Superadmins");
 
             TFM_PlayerData playerdata;
             int counter = 0;
@@ -85,7 +85,7 @@ public class Command_stfu extends TFM_Command
             TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
             if (playerdata.isMuted())
             {
-                TFM_Util.adminAction(sender.getName(), "Unmuting " + player.getName(), true);
+                TFM_Util.adminAction(sender.getName(), "Unmuting " + player.getName());
                 playerdata.setMuted(false);
                 playerMsg("Unmuted " + player.getName());
             }
@@ -93,7 +93,7 @@ public class Command_stfu extends TFM_Command
             {
                 if (!TFM_AdminList.isSuperAdmin(player))
                 {
-                    TFM_Util.adminAction(sender.getName(), "Muting " + player.getName(), true);
+                    TFM_Util.adminAction(sender.getName(), "Muting " + player.getName());
                     playerdata.setMuted(true);
 
                     if (args.length == 2 && args[1].equalsIgnoreCase("-s"))

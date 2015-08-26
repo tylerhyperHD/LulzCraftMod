@@ -102,7 +102,7 @@ public class Command_ro extends TFM_Command
         int affected = 0;
         if (targetPlayer == null)
         {
-            TFM_Util.adminAction(sender.getName(), "Removing all " + names + " within " + radius + " blocks of all players... Brace for lag!", false);
+            TFM_Util.adminAction(sender.getName(), "Removing all " + names + " within " + radius + " blocks of all players... Brace for lag!");
 
             for (final Player player : server.getOnlinePlayers())
             {
@@ -124,13 +124,13 @@ public class Command_ro extends TFM_Command
             {
                 for (Material material : materials)
                 {
-                    TFM_Util.adminAction(sender.getName(), "Removing all " + names + " within " + radius + " blocks of " + targetPlayer.getName(), false);
+                    TFM_Util.adminAction(sender.getName(), "Removing all " + names + " within " + radius + " blocks of " + targetPlayer.getName());
                     affected += TFM_Util.replaceBlocks(targetPlayer.getLocation(), material, Material.AIR, radius);
                 }
             }
         }
 
-        TFM_Util.adminAction(sender.getName(), "Remove complete! " + affected + " blocks removed.", false);
+        TFM_Util.adminAction(sender.getName(), "Remove complete! " + affected + " blocks removed.");
 
         return true;
     }

@@ -19,7 +19,7 @@ public class Command_lockup extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("all"))
             {
-                TFM_Util.adminAction(sender.getName(), "Locking up all players", true);
+                TFM_Util.adminAction(sender.getName(), "Locking up all players");
 
                 for (Player player : server.getOnlinePlayers())
                 {
@@ -29,7 +29,7 @@ public class Command_lockup extends TFM_Command
             }
             else if (args[0].equalsIgnoreCase("purge"))
             {
-                TFM_Util.adminAction(sender.getName(), "Unlocking all players", true);
+                TFM_Util.adminAction(sender.getName(), "Unlocking all players");
                 for (Player player : server.getOnlinePlayers())
                 {
                     cancelLockup(player);
@@ -54,7 +54,7 @@ public class Command_lockup extends TFM_Command
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Locking up " + player.getName(), true);
+                TFM_Util.adminAction(sender.getName(), "Locking up " + player.getName());
                 startLockup(player);
                 playerMsg("Locked up " + player.getName() + ".");
             }
@@ -68,7 +68,7 @@ public class Command_lockup extends TFM_Command
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Unlocking " + player.getName(), true);
+                TFM_Util.adminAction(sender.getName(), "Unlocking " + player.getName());
                 cancelLockup(player);
                 playerMsg("Unlocked " + player.getName() + ".");
             }

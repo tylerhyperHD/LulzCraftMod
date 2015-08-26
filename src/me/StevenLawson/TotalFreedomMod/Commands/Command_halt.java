@@ -21,7 +21,7 @@ public class Command_halt extends TFM_Command
 
         if (args[0].equalsIgnoreCase("all"))
         {
-            TFM_Util.adminAction(sender.getName(), "Halting all non-superadmins.", true);
+            TFM_Util.adminAction(sender.getName(), "Halting all non-superadmins.");
             int counter = 0;
             for (Player player : server.getOnlinePlayers())
             {
@@ -37,7 +37,7 @@ public class Command_halt extends TFM_Command
 
         if (args[0].equalsIgnoreCase("purge"))
         {
-            TFM_Util.adminAction(sender.getName(), "Unhalting all players.", true);
+            TFM_Util.adminAction(sender.getName(), "Unhalting all players.");
             int counter = 0;
             for (Player player : server.getOnlinePlayers())
             {
@@ -87,13 +87,13 @@ public class Command_halt extends TFM_Command
         TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
         if (!playerdata.isHalted())
         {
-            TFM_Util.adminAction(sender.getName(), "Halting " + player.getName(), true);
+            TFM_Util.adminAction(sender.getName(), "Halting " + player.getName());
             playerdata.setHalted(true);
             return true;
         }
         else
         {
-            TFM_Util.adminAction(sender.getName(), "Unhalting " + player.getName(), true);
+            TFM_Util.adminAction(sender.getName(), "Unhalting " + player.getName());
             playerdata.setHalted(false);
             return true;
         }

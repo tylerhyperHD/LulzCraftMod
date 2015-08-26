@@ -19,7 +19,7 @@ public class Command_wipeuserdata extends TFM_Command
             return true;
         }
 
-        TFM_Util.adminAction(sender.getName(), "Wiping Essentials playerdata", true);
+        TFM_Util.adminAction(sender.getName(), "Wiping Essentials playerdata");
 
         TFM_Util.deleteFolder(new File(server.getPluginManager().getPlugin("Essentials").getDataFolder(), "userdata"));
 

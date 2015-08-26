@@ -23,7 +23,7 @@ public class Command_cage extends TFM_Command
 
         if ("off".equals(args[0]) && sender instanceof Player)
         {
-            TFM_Util.adminAction(sender.getName(), "Uncaging " + sender.getName(), true);
+            TFM_Util.adminAction(sender.getName(), "Uncaging " + sender.getName());
             TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(sender_p);
 
             playerdata.setCaged(false);
@@ -34,7 +34,7 @@ public class Command_cage extends TFM_Command
         }
         else if ("purge".equals(args[0]))
         {
-            TFM_Util.adminAction(sender.getName(), "Uncaging all players", true);
+            TFM_Util.adminAction(sender.getName(), "Uncaging all players");
 
             for (Player player : server.getOnlinePlayers())
             {
@@ -64,7 +64,7 @@ public class Command_cage extends TFM_Command
         {
             if ("off".equals(args[1]))
             {
-                TFM_Util.adminAction(sender.getName(), "Uncaging " + player.getName(), true);
+                TFM_Util.adminAction(sender.getName(), "Uncaging " + player.getName());
 
                 playerdata.setCaged(false);
                 playerdata.regenerateHistory();
@@ -109,11 +109,11 @@ public class Command_cage extends TFM_Command
 
         if (outerMaterial != Material.SKULL)
         {
-            TFM_Util.adminAction(sender.getName(), "Caging " + player.getName(), true);
+            TFM_Util.adminAction(sender.getName(), "Caging " + player.getName());
         }
         else
         {
-            TFM_Util.adminAction(sender.getName(), "Caging " + player.getName() + " in PURE_DARTH", true);
+            TFM_Util.adminAction(sender.getName(), "Caging " + player.getName() + " in PURE_DARTH");
         }
 
         return true;

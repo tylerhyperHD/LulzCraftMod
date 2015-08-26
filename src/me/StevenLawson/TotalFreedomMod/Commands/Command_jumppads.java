@@ -31,12 +31,12 @@ public class Command_jumppads extends TFM_Command
 
             if ("off".equals(args[0]))
             {
-                TFM_Util.adminAction(sender.getName(), "Disabling Jumppads", false);
+                TFM_Util.adminAction(sender.getName(), "Disabling Jumppads");
                 TFM_Jumppads.setMode(TFM_Jumppads.JumpPadMode.OFF);
             }
             else
             {
-                TFM_Util.adminAction(sender.getName(), "Enabling Jumppads", false);
+                TFM_Util.adminAction(sender.getName(), "Enabling Jumppads");
                 TFM_Jumppads.setMode(TFM_Jumppads.JumpPadMode.MADGEEK);
             }
         }
@@ -52,12 +52,12 @@ public class Command_jumppads extends TFM_Command
             {
                 if ("off".equals(args[1]))
                 {
-                    TFM_Util.adminAction(sender.getName(), "Setting Jumppads mode to: Madgeek", false);
+                    TFM_Util.adminAction(sender.getName(), "Setting Jumppads mode to: Madgeek");
                     TFM_Jumppads.setMode(TFM_Jumppads.JumpPadMode.MADGEEK);
                 }
                 else
                 {
-                    TFM_Util.adminAction(sender.getName(), "Setting Jumppads mode to: Normal and Sideways", false);
+                    TFM_Util.adminAction(sender.getName(), "Setting Jumppads mode to: Normal and Sideways");
                     TFM_Jumppads.setMode(TFM_Jumppads.JumpPadMode.NORMAL_AND_SIDEWAYS);
                 }
             }
@@ -80,7 +80,7 @@ public class Command_jumppads extends TFM_Command
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Setting Jumppads strength to: " + String.valueOf(strength), false);
+                TFM_Util.adminAction(sender.getName(), "Setting Jumppads strength to: " + String.valueOf(strength));
                 TFM_Jumppads.setStrength((strength / 10) + 0.1F);
             }
             else

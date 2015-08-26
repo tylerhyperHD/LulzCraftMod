@@ -99,7 +99,7 @@ public class Command_adminworld extends TFM_Command
                         {
                             assertCommandPerms(sender, sender_p);
                             TFM_AdminWorld.getInstance().purgeGuestList();
-                            TFM_Util.adminAction(sender.getName(), "AdminWorld guest list purged.", false);
+                            TFM_Util.adminAction(sender.getName(), "AdminWorld guest list purged.");
                         }
                         else
                         {
@@ -122,7 +122,7 @@ public class Command_adminworld extends TFM_Command
 
                             if (TFM_AdminWorld.getInstance().addGuest(player, sender_p))
                             {
-                                TFM_Util.adminAction(sender.getName(), "AdminWorld guest added: " + player.getName(), false);
+                                TFM_Util.adminAction(sender.getName(), "AdminWorld guest added: " + player.getName());
                             }
                             else
                             {
@@ -134,7 +134,7 @@ public class Command_adminworld extends TFM_Command
                             final Player player = TFM_AdminWorld.getInstance().removeGuest(args[2]);
                             if (player != null)
                             {
-                                TFM_Util.adminAction(sender.getName(), "AdminWorld guest removed: " + player.getName(), false);
+                                TFM_Util.adminAction(sender.getName(), "AdminWorld guest removed: " + player.getName());
                             }
                             else
                             {

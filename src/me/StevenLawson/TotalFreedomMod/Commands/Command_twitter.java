@@ -116,7 +116,7 @@ public class Command_twitter extends TFM_Command
                 return true;
             }
 
-            TFM_Util.adminAction(sender.getName(), ("enable".equals(args[0]) ? "Ena" : "Disa") + "bling Twitterbot", true);
+            TFM_Util.adminAction(sender.getName(), ("enable".equals(args[0]) ? "Ena" : "Disa") + "bling Twitterbot");
             String reply = TFM_TwitterHandler.setEnabled(args[0] + "d");
             playerMsg("Reply: " + reply);
             return true;

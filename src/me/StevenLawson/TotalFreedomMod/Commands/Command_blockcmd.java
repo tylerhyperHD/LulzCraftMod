@@ -21,7 +21,7 @@ public class Command_blockcmd extends TFM_Command
 
         if (args[0].equalsIgnoreCase("purge"))
         {
-            TFM_Util.adminAction(sender.getName(), "Unblocking commands for all players", true);
+            TFM_Util.adminAction(sender.getName(), "Unblocking commands for all players");
             int counter = 0;
             for (Player player : server.getOnlinePlayers())
             {
@@ -54,7 +54,7 @@ public class Command_blockcmd extends TFM_Command
 
         playerdata.setCommandsBlocked(!playerdata.allCommandsBlocked());
 
-        TFM_Util.adminAction(sender.getName(), (playerdata.allCommandsBlocked() ? "B" : "Unb") + "locking all commands for " + player.getName(), true);
+        TFM_Util.adminAction(sender.getName(), (playerdata.allCommandsBlocked() ? "B" : "Unb") + "locking all commands for " + player.getName());
         playerMsg((playerdata.allCommandsBlocked() ? "B" : "Unb") + "locked all commands.");
 
         return true;

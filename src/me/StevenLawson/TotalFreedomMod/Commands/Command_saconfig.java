@@ -47,7 +47,7 @@ public class Command_saconfig extends TFM_Command
             }
             case CLEAN:
             {
-                TFM_Util.adminAction(sender.getName(), "Cleaning superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "Cleaning superadmin list");
                 TFM_AdminList.cleanSuperadminList(true);
                 playerMsg("Superadmins: " + StringUtils.join(TFM_AdminList.getSuperNames(), ", "), ChatColor.YELLOW);
 
@@ -61,7 +61,7 @@ public class Command_saconfig extends TFM_Command
 
                 if (args.length == 1)
                 {
-                    TFM_Util.adminAction(sender.getName(), "Cleaning my supered IPs", true);
+                    TFM_Util.adminAction(sender.getName(), "Cleaning my supered IPs");
 
                     int counter = admin.getIps().size() - 1;
                     admin.clearIPs();
@@ -84,7 +84,7 @@ public class Command_saconfig extends TFM_Command
                     }
                     else
                     {
-                        TFM_Util.adminAction(sender.getName(), "Removing a supered IP", true);
+                        TFM_Util.adminAction(sender.getName(), "Removing a supered IP");
 
                         admin.removeIp(args[1]);
 
@@ -138,7 +138,7 @@ public class Command_saconfig extends TFM_Command
                     player = TFM_DepreciationAggregator.getOfflinePlayer(server, superadmin.getLastLoginName());
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Adding " + player.getName() + " to the superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "Adding " + player.getName() + " to the superadmin list");
                 TFM_AdminList.addSuperadmin(player);
 
                 if (player.isOnline())
@@ -165,13 +165,13 @@ public class Command_saconfig extends TFM_Command
                     targetName = player.getName();
                 }
 
-                if (!TFM_AdminList.getLowerSuperNames().contains(targetName.toLowerCase()))
+                if (!TFM_AdminList.getLowercaseSuperNames().contains(targetName.toLowerCase()))
                 {
                     playerMsg("Superadmin not found: " + targetName);
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the superadmin list");
                 TFM_AdminList.removeSuperadmin(TFM_DepreciationAggregator.getOfflinePlayer(server, targetName));
 
                 // Twitterbot

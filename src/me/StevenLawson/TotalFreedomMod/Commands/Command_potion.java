@@ -42,7 +42,7 @@ public class Command_potion extends TFM_Command
                     playerMsg(TFM_Command.MSG_NO_PERMS);
                     return true;
                 }
-                TFM_Util.adminAction(sender.getName(), "Cleared all potion effects from all players", true);
+                TFM_Util.adminAction(sender.getName(), "Cleared all potion effects from all players");
                 for (Player target : server.getOnlinePlayers())
                 {
                     for (PotionEffect potion_effect : target.getActivePotionEffects())

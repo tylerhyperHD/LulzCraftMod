@@ -58,7 +58,7 @@ public class Command_orbit extends TFM_Command
         playerdata.startOrbiting(strength);
 
         player.setVelocity(new Vector(0, strength, 0));
-        TFM_Util.adminAction(sender.getName(), "Orbiting " + player.getName(), false);
+        TFM_Util.adminAction(sender.getName(), "Orbiting " + player.getName());
 
         return true;
     }

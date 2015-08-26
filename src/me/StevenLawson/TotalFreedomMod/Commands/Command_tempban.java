@@ -66,7 +66,7 @@ public class Command_tempban extends TFM_Command
             }
         }
 
-        TFM_Util.adminAction(sender.getName(), message.toString(), true);
+        TFM_Util.adminAction(sender.getName(), message.toString());
 
         TFM_BanManager.addIpBan(new TFM_Ban(TFM_Util.getIp(player), player.getName(), sender.getName(), expires, reason));
         TFM_BanManager.addUuidBan(new TFM_Ban(TFM_UuidManager.getUniqueId(player), player.getName(), sender.getName(), expires, reason));

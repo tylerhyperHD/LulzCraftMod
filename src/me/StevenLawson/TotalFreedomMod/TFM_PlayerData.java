@@ -2,10 +2,8 @@ package me.StevenLawson.TotalFreedomMod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import me.StevenLawson.TotalFreedomMod.Bridge.TFM_EssentialsBridge;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
@@ -23,51 +21,54 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class TFM_PlayerData
 {
-    public static final Map<Player, TFM_PlayerData> USER_INFO = new HashMap<Player, TFM_PlayerData>();
+    public static final Map<String, TFM_PlayerData> PLAYER_DATA = new HashMap<String, TFM_PlayerData>(); // ip,data
     public static final long AUTO_PURGE = 20L * 60L * 5L;
+
+    public static boolean hasPlayerData(Player player)
+    {
+        return PLAYER_DATA.containsKey(TFM_Util.getIp(player));
+    }
+
+    public static TFM_PlayerData getPlayerDataSync(Player player)
+    {
+        synchronized (PLAYER_DATA)
+        {
+            return getPlayerData(player);
+        }
+    }
 
     public static TFM_PlayerData getPlayerData(Player player)
     {
-        TFM_PlayerData playerdata = TFM_PlayerData.USER_INFO.get(player);
+        final String ip = TFM_Util.getIp(player);
 
-        if (playerdata != null)
+        TFM_PlayerData data = TFM_PlayerData.PLAYER_DATA.get(ip);
+
+        if (data != null)
         {
-            return playerdata;
+            return data;
         }
 
-        Iterator<Entry<Player, TFM_PlayerData>> it = USER_INFO.entrySet().iterator();
-        while (it.hasNext())
+        if (Bukkit.getOnlineMode())
         {
-            Entry<Player, TFM_PlayerData> pair = it.next();
-            TFM_PlayerData playerdataTest = pair.getValue();
-
-            if (playerdataTest.player.getName().equalsIgnoreCase(player.getName()))
+            for (TFM_PlayerData dataTest : PLAYER_DATA.values())
             {
-                if (Bukkit.getOnlineMode())
+                if (dataTest.player.getName().equalsIgnoreCase(player.getName()))
                 {
-                    playerdata = playerdataTest;
+                    data = dataTest;
                     break;
-                }
-                else
-                {
-                    if (playerdataTest.ip.equalsIgnoreCase(player.getAddress().getAddress().getHostAddress()))
-                    {
-                        playerdata = playerdataTest;
-                        break;
-                    }
                 }
             }
         }
 
-        if (playerdata != null)
+        if (data != null)
         {
-            return playerdata;
+            return data;
         }
 
-        playerdata = new TFM_PlayerData(player);
-        TFM_PlayerData.USER_INFO.put(player, playerdata);
+        data = new TFM_PlayerData(player, TFM_UuidManager.getUniqueId(player), ip);
+        TFM_PlayerData.PLAYER_DATA.put(ip, data);
 
-        return playerdata;
+        return data;
     }
     //
     private final Player player;
@@ -109,12 +110,16 @@ public class TFM_PlayerData
     private String lastCommand = "";
     private String tag = null;
     private EntityType mobThrowerEntity = EntityType.PIG;
+    private boolean inGod = false;
+    private boolean isDoubleJumper = false;
+    private boolean inSeniorAdminchat = false;
+    private boolean inDevchat = false;
 
-    private TFM_PlayerData(Player player)
+    private TFM_PlayerData(Player player, UUID uuid, String ip)
     {
         this.player = player;
-        this.uuid = TFM_UuidManager.getUniqueId(player.getName());
-        this.ip = player.getAddress().getAddress().getHostAddress();
+        this.uuid = uuid;
+        this.ip = ip;
     }
 
     public String getIpAddress()
@@ -127,9 +132,19 @@ public class TFM_PlayerData
         return uuid;
     }
 
+    public void setSmited(boolean isSmited)
+    {
+        this.isSmited = isSmited;
+    }
+
+    public boolean isSmited()
+    {
+        return this.isSmited;
+    }
+
     public boolean isOrbiting()
     {
-        return this.isOrbiting;
+        return isOrbiting;
     }
 
     public void startOrbiting(double strength)
@@ -145,7 +160,7 @@ public class TFM_PlayerData
 
     public double orbitStrength()
     {
-        return this.orbitStrength;
+        return orbitStrength;
     }
 
     public void setCaged(boolean state)
@@ -163,7 +178,7 @@ public class TFM_PlayerData
 
     public boolean isCaged()
     {
-        return this.isCaged;
+        return isCaged;
     }
 
     public Material getCageMaterial(CageLayer layer)
@@ -181,17 +196,17 @@ public class TFM_PlayerData
 
     public Location getCagePos()
     {
-        return this.cagePosition;
+        return cagePosition;
     }
 
     public void clearHistory()
     {
-        this.cageHistory.clear();
+        cageHistory.clear();
     }
 
     public void insertHistoryBlock(Location location, Material material)
     {
-        this.cageHistory.add(new TFM_BlockData(location, material));
+        cageHistory.add(new TFM_BlockData(location, material));
     }
 
     public void regenerateHistory()
@@ -220,7 +235,7 @@ public class TFM_PlayerData
 
         if (player.getGameMode() != GameMode.CREATIVE)
         {
-            player.setFlying(false);
+            TFM_Util.setFlying(player, false);
         }
 
         if (!freeze)
@@ -229,14 +244,14 @@ public class TFM_PlayerData
         }
 
         freezeLocation = player.getLocation(); // Blockify location
-        player.setFlying(true); // Avoid infinite falling
+        TFM_Util.setFlying(player, true); // Avoid infinite falling
 
         unfreezeTask = new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                TFM_Util.adminAction("Automatic", "Unfreezing " + player.getName(), false);
+                TFM_Util.adminAction("LulzCraft", "Unfreezing " + player.getName());
                 setFrozen(false);
             }
 
@@ -246,6 +261,30 @@ public class TFM_PlayerData
     public void resetMsgCount()
     {
         this.messageCount = 0;
+    }
+
+    public boolean usesRainbowNick()
+    {
+        return this.usesRainbowNick;
+    }
+
+    public void enableRainbowNick()
+    {
+        this.usesRainbowNick = true;
+    }
+
+    public void disableRainbowNick()
+    {
+        this.usesRainbowNick = false;
+    }
+    
+    public boolean isDonatorIdVerified()
+    {
+        return this.verifiedDonatorId;
+    }
+    public void setDonatorIdVerified(boolean verifiedDonatorId)
+    {
+        this.verifiedDonatorId = verifiedDonatorId;
     }
 
     public int incrementAndGetMsgCount()
@@ -319,18 +358,6 @@ public class TFM_PlayerData
     {
         return this.mobThrowerEnabled;
     }
-    public boolean usesRainbowNick()
-    {
-        return this.usesRainbowNick;
-    }
-    public void enableRainbowNick()
-    {
-        this.usesRainbowNick = true;
-    }
-    public void disableRainbowNick()
-    {
-        this.usesRainbowNick = false;
-    }
 
     public void enqueueMob(LivingEntity mob)
     {
@@ -402,14 +429,12 @@ public class TFM_PlayerData
 
         unmuteTask = new BukkitRunnable()
         {
-
             @Override
             public void run()
             {
-                TFM_Util.adminAction("Automatic", "Unmuting " + player.getName(), false);
+                TFM_Util.adminAction("LulzCraft", "Unmuting " + player.getName());
                 setMuted(false);
             }
-
         }.runTaskLater(TotalFreedomMod.plugin, AUTO_PURGE);
     }
 
@@ -426,7 +451,7 @@ public class TFM_PlayerData
         {
             player.setOp(false);
             player.setGameMode(GameMode.SURVIVAL);
-            player.setFlying(false);
+            TFM_Util.setFlying(player, false);
             TFM_EssentialsBridge.setNickname(player.getName(), player.getName());
             player.closeInventory();
             player.setTotalExperience(0);
@@ -468,15 +493,25 @@ public class TFM_PlayerData
     {
         return lastMessage;
     }
-    
-    public void setSmited(boolean isSmited)
+
+    public boolean inGod()
     {
-        this.isSmited = isSmited;
+        return this.inGod;
     }
 
-    public boolean isSmited()
+    public void setGod(boolean state)
     {
-        return this.isSmited;
+        this.inGod = state;
+    }
+
+    public boolean isDoubleJumper()
+    {
+        return this.isDoubleJumper;
+    }
+
+    public void setDoubleJumper(boolean state)
+    {
+        this.isDoubleJumper = state;
     }
 
     public void setAdminChat(boolean inAdminchat)
@@ -487,6 +522,26 @@ public class TFM_PlayerData
     public boolean inAdminChat()
     {
         return this.inAdminchat;
+    }
+
+    public void setSeniorAdminChat(boolean inSeniorAdminchat)
+    {
+        this.inSeniorAdminchat = inSeniorAdminchat;
+    }
+
+    public boolean inSeniorAdminChat()
+    {
+        return this.inSeniorAdminchat;
+    }
+
+    public void setDevChat(boolean inDevchat)
+    {
+        this.inDevchat = inDevchat;
+    }
+
+    public boolean inDevChat()
+    {
+        return this.inDevchat;
     }
 
     public boolean allCommandsBlocked()
@@ -511,14 +566,6 @@ public class TFM_PlayerData
     public void setSuperadminIdVerified(boolean verifiedSuperadminId)
     {
         this.verifiedSuperadminId = verifiedSuperadminId;
-    }
-    public boolean isDonatorIdVerified()
-    {
-        return this.verifiedDonatorId;
-    }
-    public void setDonatorIdVerified(boolean verifiedDonatorId)
-    {
-        this.verifiedDonatorId = verifiedDonatorId;
     }
 
     public String getLastCommand()

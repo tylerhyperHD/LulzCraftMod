@@ -112,7 +112,7 @@ public class Command_gadmin extends TFM_Command
         {
             case KICK:
             {
-                TFM_Util.adminAction(sender.getName(), String.format("Kicking: %s.", target.getName()), false);
+                TFM_Util.adminAction(sender.getName(), String.format("Kicking: %s.", target.getName()));
                 target.kickPlayer("Kicked by Administrator");
 
                 break;
@@ -121,7 +121,7 @@ public class Command_gadmin extends TFM_Command
             {
                 TFM_BanManager.addUuidBan(target);
 
-                TFM_Util.adminAction(sender.getName(), String.format("Banning Name: %s.", target.getName()), true);
+                TFM_Util.adminAction(sender.getName(), String.format("Banning Name: %s.", target.getName()));
                 target.kickPlayer("Username banned by Administrator.");
 
                 break;
@@ -134,7 +134,7 @@ public class Command_gadmin extends TFM_Command
                 {
                     ip = String.format("%s.%s.*.*", ip_parts[0], ip_parts[1]);
                 }
-                TFM_Util.adminAction(sender.getName(), String.format("Banning IP: %s.", ip), true);
+                TFM_Util.adminAction(sender.getName(), String.format("Banning IP: %s.", ip));
                 TFM_BanManager.addIpBan(target);
 
                 target.kickPlayer("IP address banned by Administrator.");
@@ -149,7 +149,7 @@ public class Command_gadmin extends TFM_Command
                 {
                     ip = String.format("%s.%s.*.*", ip_parts[0], ip_parts[1]);
                 }
-                TFM_Util.adminAction(sender.getName(), String.format("Banning Name: %s, IP: %s.", target.getName(), ip), true);
+                TFM_Util.adminAction(sender.getName(), String.format("Banning Name: %s, IP: %s.", target.getName(), ip));
 
                 TFM_BanManager.addUuidBan(target);
                 TFM_BanManager.addIpBan(target);
@@ -160,7 +160,7 @@ public class Command_gadmin extends TFM_Command
             }
             case OP:
             {
-                TFM_Util.adminAction(sender.getName(), String.format("Opping %s.", target.getName()), false);
+                TFM_Util.adminAction(sender.getName(), String.format("Opping %s.", target.getName()));
                 target.setOp(false);
                 target.sendMessage(TFM_Command.YOU_ARE_OP);
 
@@ -168,7 +168,7 @@ public class Command_gadmin extends TFM_Command
             }
             case DEOP:
             {
-                TFM_Util.adminAction(sender.getName(), String.format("Deopping %s.", target.getName()), false);
+                TFM_Util.adminAction(sender.getName(), String.format("Deopping %s.", target.getName()));
                 target.setOp(false);
                 target.sendMessage(TFM_Command.YOU_ARE_NOT_OP);
 

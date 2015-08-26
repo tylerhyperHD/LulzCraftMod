@@ -35,7 +35,7 @@ public class Command_deop extends TFM_Command
             player = TFM_DepreciationAggregator.getOfflinePlayer(server, args[0]);
         }
 
-        TFM_Util.adminAction(sender.getName(), "De-opping " + player.getName(), false);
+        TFM_Util.adminAction(sender.getName(), "De-opping " + player.getName());
 
         player.setOp(false);
 

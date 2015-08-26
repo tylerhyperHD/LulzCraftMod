@@ -24,7 +24,7 @@ public class Command_tfbanlist extends TFM_Command
                 {
                     try
                     {
-                        TFM_Util.adminAction(sender.getName(), "Purging the ban list", true);
+                        TFM_Util.adminAction(sender.getName(), "Purging the ban list");
                         TFM_BanManager.purgeUuidBans();
                         sender.sendMessage(ChatColor.GRAY + "Ban list has been purged.");
                     }

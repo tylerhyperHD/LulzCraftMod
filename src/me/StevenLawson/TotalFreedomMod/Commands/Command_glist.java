@@ -76,7 +76,7 @@ public class Command_glist extends TFM_Command
             String mode = args[0].toLowerCase();
             if (mode.equalsIgnoreCase("ban"))
             {
-                TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ips, ", "), true);
+                TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ips, ", "));
 
                 final Player target = getPlayer(username, true);
                 if (target != null)
@@ -97,7 +97,7 @@ public class Command_glist extends TFM_Command
             }
             else if (mode.equalsIgnoreCase("unban"))
             {
-                TFM_Util.adminAction(sender.getName(), "Unbanning " + username + " and IPs: " + StringUtils.join(ips, ", "), true);
+                TFM_Util.adminAction(sender.getName(), "Unbanning " + username + " and IPs: " + StringUtils.join(ips, ", "));
                 TFM_BanManager.unbanUuid(TFM_UuidManager.getUniqueId(username));
                 for (String ip : ips)
                 {

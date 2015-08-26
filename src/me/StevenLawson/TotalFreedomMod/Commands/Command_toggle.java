@@ -79,7 +79,7 @@ public class Command_toggle extends TFM_Command
 
         if (args[0].equals("lockdown"))
         {
-            TFM_Util.adminAction(sender.getName(), (TotalFreedomMod.lockdownEnabled ? "De-a" : "A") + "ctivating server lockdown", true);
+            TFM_Util.adminAction(sender.getName(), (TotalFreedomMod.lockdownEnabled ? "De-a" : "A") + "ctivating server lockdown");
             TotalFreedomMod.lockdownEnabled = !TotalFreedomMod.lockdownEnabled;
             return true;
         }

@@ -57,7 +57,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class TFM_PlayerListener implements Listener
 {
@@ -393,7 +392,6 @@ public class TFM_PlayerListener implements Listener
             return;
         }
 
-
         final Player player = event.getPlayer();
         final TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
 
@@ -617,205 +615,205 @@ public class TFM_PlayerListener implements Listener
                 return;
             }
             String nickname = TFM_EssentialsBridge.getNickname(player.getName());
-            
+
             if (nickname != null)
             {
-                
-            if (!TFM_DonatorList.isDonator(player))
-            {
-            final String getNickname = TFM_EssentialsBridge.getNickname(player.getName());
-            final String nickPlain = ChatColor.stripColor(TFM_Util.colorize(getNickname.trim()));
-            if (playerdata.usesRainbowNick())
-            {
-            final int nickColors = RANDOM.nextInt(15);
-            switch (nickColors)
-            // It's organized by the colors of the rainbow, because why not?
-            {
-                case 0:
+
+                if (!TFM_DonatorList.isDonator(player))
                 {
-
-                    if (player == null)
+                    final String getNickname = TFM_EssentialsBridge.getNickname(player.getName());
+                    final String nickPlain = ChatColor.stripColor(TFM_Util.colorize(getNickname.trim()));
+                    if (playerdata.usesRainbowNick())
                     {
-                        break; //everything
+                        final int nickColors = RANDOM.nextInt(15);
+                        switch (nickColors)
+                        // It's organized by the colors of the rainbow, because why not?
+                        {
+                            case 0:
+                            {
+
+                                if (player == null)
+                                {
+                                    break; //everything
+                                }
+
+                                final String setToNick = "§4" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+
+                            case 1:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§c" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 2:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§6" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 3:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§e" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 4:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§2" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 5:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§a" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 6:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§b" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 7:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§3" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 8:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§1" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 9:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§9" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 10:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§d" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 11:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§5" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            // And then the non-rainbow colors - eww.
+                            case 12:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§f" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 13:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§7" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                            case 14:
+                            {
+
+                                if (player == null)
+                                {
+                                    break;
+                                }
+
+                                final String setToNick = "§8" + nickPlain;
+                                TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
+                                break;
+                            }
+                        }
                     }
-
-                    final String setToNick = "§4" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
                 }
-
-                case 1:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§c" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 2:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§6" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 3:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§e" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 4:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§2" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 5:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§a" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 6:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§b" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 7:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§3" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 8:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§1" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 9:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§9" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 10:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§d" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 11:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§5" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                // And then the non-rainbow colors - eww.
-                case 12:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§f" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 13:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§7" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-                case 14:
-                {
-
-                    if (player == null)
-                    {
-                        break;
-                    }
-
-                    final String setToNick = "§8" + nickPlain;
-                    TFM_EssentialsBridge.setNickname(player.getName(), setToNick);
-                    break;
-                }
-            }
-            }
-            }
             }
 
             // Finally, set message
@@ -825,8 +823,7 @@ public class TFM_PlayerListener implements Listener
             if (playerdata.getTag() != null)
             {
                 event.setFormat(ChatColor.DARK_GRAY + "<" + ChatColor.RESET + playerdata.getTag().replaceAll("%", "%%") + " %1$s" + ChatColor.DARK_GRAY + "> " + ChatColor.RESET + "%2$s");
-                        
-                
+
             }
         }
         catch (Exception ex)
@@ -1030,7 +1027,6 @@ public class TFM_PlayerListener implements Listener
                 TFM_DonatorList.updateLastLogin(player);
             }
         }
-        
 
         // Handle admin impostors
         if (TFM_AdminList.isAdminImpostor(player))
@@ -1076,7 +1072,7 @@ public class TFM_PlayerListener implements Listener
         else if (player.getName().equals("Someday") || (player.getName().equals("xYurippe")))
         {
             TFM_PlayerData.getPlayerData(player).setTag("&8[&4Executive&8]");
-        }       
+        }
         else if (TFM_AdminList.isSeniorAdmin(player))
         {
             name = ChatColor.LIGHT_PURPLE + name;
@@ -1086,7 +1082,7 @@ public class TFM_PlayerListener implements Listener
         {
             name = ChatColor.DARK_GREEN + name;
             TFM_PlayerData.getPlayerData(player).setTag("&8[&2Telnet Admin&8]");
-        }        
+        }
         else if (TFM_AdminList.isSuperAdmin(player))
         {
             name = ChatColor.AQUA + name;
@@ -1094,11 +1090,11 @@ public class TFM_PlayerListener implements Listener
         }
         else if (TFM_DonatorList.isDonatorPlus(player))
         {
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&dDonator+&8]");            
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&dDonator+&8]");
         }
         else if (TFM_DonatorList.isDonator(player))
         {
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Donator&8]");            
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Donator&8]");
         }
 
         try

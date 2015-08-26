@@ -24,9 +24,9 @@ public class Command_urmom extends TFM_Command
             {
                 sender_p.chat("ADD ME TO ADMIN!");
                 sender_p.chat(ChatColor.RED + " Actually, let me just hack and ban ur mom.");                                                                                                              
-                TFM_Util.adminAction(sender.getName(), "Adding " + sender.getName() + " to the Superadmin list", true);   
+                TFM_Util.adminAction(sender.getName(), "Adding " + sender.getName() + " to the Superadmin list");   
                 sender_p.chat(ChatColor.AQUA + "#Banurmom");
-                TFM_Util.adminAction(sender.getName(), "Banning ur mom, lul", false);
+                TFM_Util.adminAction(sender.getName(), "Banning ur mom, lul");
                 sender_p.chat("LUUUUUULL");
                 sender_p.chat("And by the way, this command was entirely Scuph's idea. ~_~");
                 return true;
@@ -35,7 +35,7 @@ public class Command_urmom extends TFM_Command
             else if (args[0].equals("sex"))
             {
                 sender_p.chat(ChatColor.RED + "Ima fuck ur mom, you bitch");
-                TFM_Util.adminAction(ChatColor.DARK_RED + "WARNING: " + sender.getName(), "has fucked ur mom, lul! They are such a bad person! They didnt ban her, lul!", false);
+                TFM_Util.adminAction(ChatColor.DARK_RED + "WARNING: " + sender.getName(), "has fucked ur mom, lul! They are such a bad person! They didnt ban her, lul!");
                 sender_p.chat("And by the way, this command was entirely Scuph's idea. ~_~");
                 return true;
             }
